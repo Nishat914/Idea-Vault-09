@@ -13,7 +13,10 @@ import {
 } from "@heroui/react";
 import { TypeAnimation } from "react-type-animation";
 
+
+
 const AddIdeaPage = () => {
+    
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,6 +39,7 @@ const AddIdeaPage = () => {
 
   return (
     <div className="container mx-auto w-[80%] md:w-[60%] lg:w-[50%] mt-20">
+       
       <div className="text-center mb-8">
         <TypeAnimation
             sequence={[
@@ -79,10 +83,18 @@ const AddIdeaPage = () => {
                 <FieldError />
               </TextField>
             </div>
+                {/* tags */}
+            <div className="md:col-span-2">
+              <TextField name="tags" isRequired>
+                <Label className="text-mauve-600">Tags</Label>
+                <Input placeholder="Enter tag" />
+                <FieldError />
+              </TextField>
+            </div>
 
             {/* Detail Description */}
             <div className="md:col-span-2">
-              <TextField name="detailDescription" isRequired>
+              <TextField name="detailedDescription" isRequired>
                 <Label className="text-mauve-600">Detail Description</Label>
                 <TextArea
                   placeholder="Detailed description..."

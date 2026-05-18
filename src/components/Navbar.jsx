@@ -11,40 +11,40 @@ const Navbar = () => {
     const navLinkClass = (path) =>
         `font-semibold pb-1 ${
             pathname === path
-                ? "border-b-2 border-teal-500 text-teal-600"
-                : "text-teal-950"
+                ? "border-b-2 border-mauve-500 text-mauve-500"
+                : "text-mauve-800"
         }`;
     
     return(
         <>
-            <div className=" ">
-                <div className="navbar flex-col md:flex-row  bg-transparent  shadow-sm p-4">
+            <div className="relative z-50">
+                <div className="navbar flex-col md:flex-row  bg-transparent  shadow-sm p-4 relative z-50">
                     <div className="flex-1">
-                        <p className="btn btn-ghost text-4xl font-bold text-teal-950">Idea<span className="text-teal-500 ">Vault</span></p>
+                        <p className="btn btn-ghost text-4xl font-bold text-mauve-700">Idea<span className="text-mauve-500 ">Vault</span></p>
                         
                     </div>
-                    <div className="flex justify-center items-center gap-4 text-teal-950">
+                    <div className="flex justify-center items-center gap-4 text-mauve-800">
                         <div className=" flex justify-center items-center  gap-6">
                             <Link href="/" className={navLinkClass("/")}>Home</Link>
                             <Link href="/ideas" className={navLinkClass("/ideas")}>Ideas</Link>
-                            <div className="dropdown dropdown-bottom dropdown-center">
+                            <div className="dropdown  dropdown-bottom dropdown-center">
                                 <div tabIndex={0} role="button" className="btn m-1">
                                     <RiArrowDropDownFill />
                                 </div>
-                                <ul tabIndex="-1" className="dropdown-content menu menu-sm bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                                <ul tabIndex="-1" className="dropdown-content menu menu-sm bg-mauve-200 rounded-box z-1 w-52 p-2 shadow-sm">
                                     <li><Link href="/add-idea" className={`${
                                             pathname === "/add-idea"
-                                                ? "bg-teal-500 text-white"
+                                                ? "bg-mauve-500 text-white"
                                                 : ""
                                         }`}>Add Idea</Link></li>
                                     <li><Link href="/my-ideas" className={`${
                                             pathname === "/my-ideas"
-                                                ? "bg-teal-500 text-white"
+                                                ? "bg-mauve-500 text-white"
                                                 : ""
                                         }`}>My Ideas</Link></li>
                                     <li><Link href="/my-interactions"   className={`${
                                             pathname === "/my-interactions"
-                                                ? "bg-teal-500 text-white"
+                                                ? "bg-mauve-500 text-white"
                                                 : ""
                                         }`}>My Interactions</Link></li>
                                 </ul>
@@ -65,10 +65,10 @@ const Navbar = () => {
                             </div>
                             <ul
                                 tabIndex="-1"
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-mauve-200 rounded-box z-10 mt-3 w-52 p-2 shadow">
                                 <li><Link  href="/profile"  className={`${
                                     pathname === "/profile"
-                                        ? "bg-teal-500 text-white"
+                                        ? "bg-mauve-500 text-white"
                                         : ""
                                 }`}>Profile</Link></li>
                                 <li><Link  href="/add-idea">Login</Link></li>

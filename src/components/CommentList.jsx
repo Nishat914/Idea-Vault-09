@@ -1,6 +1,18 @@
+"use client"
+
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { FaEdit, FaTrash } from "react-icons/fa";
 const CommentList = ({idea}) => {
+    const handleDeleteComment = async (index) => {
+        await fetch(
+        `http://localhost:5000/ideas/${idea._id}/comments/${index}/delete`,
+        {
+            method: "PATCH",
+        }
+        );
+
+        window.location.reload();
+    };
     return(
         <>
             <div className="space-y-5">
@@ -35,7 +47,7 @@ const CommentList = ({idea}) => {
                                 </button>
 
                                 <button
-                                
+                                onClick={() => handleDeleteComment(index)}
                                 className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400"
                                 >
                                 <FaTrash className="text-white" />

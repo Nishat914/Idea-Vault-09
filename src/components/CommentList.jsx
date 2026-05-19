@@ -1,10 +1,14 @@
 "use client"
 
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
-import { AlertDialog, Button } from "@heroui/react";
+import { AlertDialog, Button, Modal, Surface, TextArea } from "@heroui/react";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useState } from "react";
 
 const CommentList = ({idea}) => {
+    const [editText, setEditText] = useState("");
+    const [selectedIndex, setSelectedIndex] = useState(null);
+
     const handleDeleteComment = async (index) => {
         await fetch(
         `http://localhost:5000/ideas/${idea._id}/comments/${index}/delete`,
@@ -15,8 +19,23 @@ const CommentList = ({idea}) => {
 
         window.location.reload();
     };
-    
+    const handleEditComment = async () => {
+        if (!editText.trim()) return;
 
+        await fetch(`http://localhost:5000/ideas/${idea._id}/comments/${selectedIndex}`,
+            {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                text: editText,
+            }),
+            }
+        );
+
+        window.location.reload();
+    };
     return(
         <>
             <div className="space-y-5">
@@ -43,11 +62,54 @@ const CommentList = ({idea}) => {
                             </div>
 
                             <div className="flex gap-2">
-                                <button
-                                className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400"
-                                >
-                                <FaEdit className="text-white" />
-                                </button>
+                               
+                                <div>
+                                    <Modal>
+                                        <Button
+                                        onPress={() => {
+                                            setSelectedIndex(index);
+                                            setEditText(comment.text);
+                                        }}
+                                        className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400"
+                                        >
+                                        <FaEdit className="text-white" />
+                                        </Button>
+
+                                        <Modal.Backdrop>
+                                        <Modal.Container placement="auto">
+                                            <Modal.Dialog className="sm:max-w-xl">
+                                            <Modal.CloseTrigger />
+
+                                            <Modal.Header>
+                                                <Modal.Heading className="text-mauve-600 text-2xl">Edit Comment</Modal.Heading>
+                                            </Modal.Header>
+
+                                            <Modal.Body className="p-6">
+                                                <Surface variant="default">
+                                                <div className="p-6 space-y-6">
+                                                    <TextArea
+                                                    value={editText}
+                                                    onChange={(e) => setEditText(e.target.value)}
+                                                    placeholder="Update your comment..."
+                                                    />
+
+                                                    <Modal.Footer>
+                                                    <Button
+                                                        onPress={handleEditComment}
+                                                        className="bg-mauve-600 text-white"
+                                                        slot="close"
+                                                    >
+                                                        Save
+                                                    </Button>
+                                                    </Modal.Footer>
+                                                </div>
+                                                </Surface>
+                                            </Modal.Body>
+                                            </Modal.Dialog>
+                                        </Modal.Container>
+                                        </Modal.Backdrop>
+                                    </Modal>
+                                </div>
                                 <div>
                                     <AlertDialog>
                                           <Button className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400" >
@@ -79,7 +141,7 @@ const CommentList = ({idea}) => {
                                               </AlertDialog.Dialog>
                                             </AlertDialog.Container>
                                           </AlertDialog.Backdrop>
-                                        </AlertDialog>
+                                    </AlertDialog>
                                 </div>
                         
                             </div>

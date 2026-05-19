@@ -2,7 +2,7 @@ import CommentForm from "@/components/CommentForm";
 import CommentList from "@/components/CommentList";
 import { Card, Avatar, Button, TextArea } from "@heroui/react";
 import { FaHeart, FaRegCommentDots, FaEdit, FaTrash } from "react-icons/fa";
-import { IoChatboxEllipsesOutline } from "react-icons/io5";
+
 
 
 const IdeaDetailsPage = async ({ params }) => {

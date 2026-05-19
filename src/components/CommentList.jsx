@@ -1,7 +1,9 @@
 "use client"
 
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { AlertDialog, Button } from "@heroui/react";
 import { FaEdit, FaTrash } from "react-icons/fa";
+
 const CommentList = ({idea}) => {
     const handleDeleteComment = async (index) => {
         await fetch(
@@ -13,6 +15,8 @@ const CommentList = ({idea}) => {
 
         window.location.reload();
     };
+    
+
     return(
         <>
             <div className="space-y-5">
@@ -40,18 +44,44 @@ const CommentList = ({idea}) => {
 
                             <div className="flex gap-2">
                                 <button
-                                
                                 className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400"
                                 >
                                 <FaEdit className="text-white" />
                                 </button>
-
-                                <button
-                                onClick={() => handleDeleteComment(index)}
-                                className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400"
-                                >
-                                <FaTrash className="text-white" />
-                                </button>
+                                <div>
+                                    <AlertDialog>
+                                          <Button className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400" >
+                                            <FaTrash className="text-white" />
+                                          </Button>
+                                          <AlertDialog.Backdrop>
+                                            <AlertDialog.Container>
+                                              <AlertDialog.Dialog className="sm:max-w-100 ">
+                                                <AlertDialog.CloseTrigger />
+                                                <AlertDialog.Header>
+                                                  <AlertDialog.Icon status="danger" />
+                                                  <AlertDialog.Heading>
+                                                    Delete comment permanently?
+                                                  </AlertDialog.Heading>
+                                                </AlertDialog.Header>
+                                                <AlertDialog.Body>
+                                                  <p>
+                                                    This will permanently delete and all of its data. This action cannot be undone.
+                                                  </p>
+                                                </AlertDialog.Body>
+                                                <AlertDialog.Footer>
+                                                  <Button slot="close" variant="tertiary">
+                                                    Cancel
+                                                  </Button>
+                                                  <Button onClick={() => handleDeleteComment(index)} slot="close" className="p-2 rounded-full bg-mauve-600 hover:bg-mauve-400" >
+                                                    Delete
+                                                  </Button>
+                                                </AlertDialog.Footer>
+                                              </AlertDialog.Dialog>
+                                            </AlertDialog.Container>
+                                          </AlertDialog.Backdrop>
+                                        </AlertDialog>
+                                </div>
+                        
                             </div>
                             
                                 

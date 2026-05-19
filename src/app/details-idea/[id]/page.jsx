@@ -1,5 +1,8 @@
+import CommentForm from "@/components/CommentForm";
 import { Card, Avatar, Button, TextArea } from "@heroui/react";
 import { FaHeart, FaRegCommentDots, FaEdit, FaTrash } from "react-icons/fa";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
+
 
 const IdeaDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -27,12 +30,12 @@ const IdeaDetailsPage = async ({ params }) => {
                 {idea.category}
               </p>
 
-              <h1 className="text-4xl text-mauve-700 font-bold mt-2">
+              <h1 className="text-4xl text-mauve-600 font-bold mt-2">
                 {idea.title}
               </h1>
             </div>
 
-            <p className="text-slate-400 leading-8 text-lg">
+            <p className="text-mauve-500 leading-8 text-lg">
               {idea.detailedDescription}
             </p>
 
@@ -59,12 +62,57 @@ const IdeaDetailsPage = async ({ params }) => {
 
                 <div className="flex items-center gap-2">
                   <FaRegCommentDots size={18} />
-                  <span>{idea?.comments ?? 0}</span>
+                  <span>{idea?.comments?.length || 0}</span>
                 </div>
               </div>
             </div>
           </div>
         </Card>
+
+        {/* Comment Section */}
+        <Card className="bg-linear-to-r from-pink-100 via-mauve-300 to-mauve-400 ">
+          <div className="p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-mauve-600">
+              Comments
+            </h2> 
+
+            {/* Add Comment */}
+            <CommentForm ideaId={id} />
+
+            {/* Comments List */}
+            <div className="space-y-5">
+                {idea?.comments?.length > 0 ? (
+                    idea.comments.map((comment, index) => (
+                    <div
+                        key={index}
+                        className="border border-mauve-600 rounded-2xl p-5 bg-mauve-500"
+                    >
+                        <div>
+                        <h4 className="font-semibold text-white">
+                            {comment.user}
+                        </h4>
+
+                        <p className="text-sm text-slate-300">
+                            {comment.time}
+                        </p>
+                        </div>
+
+                        <p className="mt-4 text-white">
+                        {comment.text}
+                        </p>
+                    </div>
+                    ))
+                ) : (
+                    <div className="text-center py-8 bg-linear-to-r from-pink-200 via-mauve-400 to-mauve-500 rounded-2xl flex justify-center items-center flex-col gap-4">
+                        <IoChatboxEllipsesOutline />
+                    <p className="text-slate-200 text-lg">
+                        No comments yet!!
+                    </p>
+                    </div>
+                )}
+                </div>
+          </div>
+        </Card> 
 
         
 

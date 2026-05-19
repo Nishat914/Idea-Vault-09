@@ -1,6 +1,7 @@
 import {Avatar, Button, Card} from "@heroui/react";
 import Link from "next/link";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
+import { motion } from "framer-motion";
 const IdeasPage = async() => {
 
     const res = await fetch(`http://localhost:5000/ideas`)
@@ -10,10 +11,12 @@ const IdeasPage = async() => {
     
     return(
         <>
-            <div className="container mx-auto w-[80%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-20">
+            <div className="container mx-auto w-[80%] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-20 ">
+                
                 {ideas.map((idea) => {
                     return(
-                        <Card key={idea._id} className=" gap-2 bg-linear-to-t from-pink-100 via-mauve-200 to-mauve-300">
+                        
+                        <Card key={idea._id} className=" bg-linear-to-t from-pink-100 via-mauve-200 to-mauve-300">
                     <img
                     alt="Indie Hackers community"
                     className="pointer-events-none aspect-square w-14 rounded-2xl object-cover select-none"
@@ -21,7 +24,7 @@ const IdeasPage = async() => {
                     src={idea.imageURL}
                     />
                     <Card.Header>
-                    <Card.Title>{idea.title}</Card.Title>
+                    <Card.Title >{idea.title}</Card.Title>
                     <Card.Description>category : {idea.category}</Card.Description>
                     </Card.Header>
                     <Card.Footer className="flex gap-2">
@@ -32,7 +35,7 @@ const IdeasPage = async() => {
                         />
                         <Avatar.Fallback className="text-xs">IH</Avatar.Fallback>
                     </Avatar>
-                    <span className="text-xs"> {idea.targetAudience}</span>
+                    <span className="text-xs "> {idea.targetAudience}</span>
                     
                     </Card.Footer>
                     <Link href={`/details-idea/${idea._id}`}>
@@ -40,12 +43,14 @@ const IdeasPage = async() => {
                     </Link>
                     
                 </Card>
+                
                     )
                     
                 })}
                  
-
+               
             </div>
+            
            
         </>
     )

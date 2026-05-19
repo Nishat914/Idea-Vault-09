@@ -1,4 +1,5 @@
 import CommentForm from "@/components/CommentForm";
+import CommentList from "@/components/CommentList";
 import { Card, Avatar, Button, TextArea } from "@heroui/react";
 import { FaHeart, FaRegCommentDots, FaEdit, FaTrash } from "react-icons/fa";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
@@ -80,37 +81,8 @@ const IdeaDetailsPage = async ({ params }) => {
             <CommentForm ideaId={id} />
 
             {/* Comments List */}
-            <div className="space-y-5">
-                {idea?.comments?.length > 0 ? (
-                    idea.comments.map((comment, index) => (
-                    <div
-                        key={index}
-                        className="border border-mauve-600 rounded-2xl p-5 bg-mauve-500"
-                    >
-                        <div>
-                        <h4 className="font-semibold text-white">
-                            {comment.user}
-                        </h4>
-
-                        <p className="text-sm text-slate-300">
-                            {comment.time}
-                        </p>
-                        </div>
-
-                        <p className="mt-4 text-white">
-                        {comment.text}
-                        </p>
-                    </div>
-                    ))
-                ) : (
-                    <div className="text-center py-8 bg-linear-to-r from-pink-200 via-mauve-400 to-mauve-500 rounded-2xl flex justify-center items-center flex-col gap-4">
-                        <IoChatboxEllipsesOutline />
-                    <p className="text-slate-200 text-lg">
-                        No comments yet!!
-                    </p>
-                    </div>
-                )}
-                </div>
+            <CommentList idea={idea}></CommentList>
+            
           </div>
         </Card> 
 

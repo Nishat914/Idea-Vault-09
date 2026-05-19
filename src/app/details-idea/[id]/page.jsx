@@ -1,8 +1,76 @@
-const IdeaDetailsPage = () => {
-    return(
-        <>
-         <h2>IdeaDetailsPage</h2>
-        </>
-    )
-}
-export default IdeaDetailsPage
+import { Card, Avatar, Button, TextArea } from "@heroui/react";
+import { FaHeart, FaRegCommentDots, FaEdit, FaTrash } from "react-icons/fa";
+
+const IdeaDetailsPage = async ({ params }) => {
+    const { id } = await params;
+    console.log(id)
+    const res = await fetch(`http://localhost:5000/ideas/${id}`);
+    const idea = await res.json();
+    console.log(idea)
+
+
+  return (
+    <div className="min-h-screen px-4 py-10">
+      <div className="max-w-5xl mx-auto space-y-8">
+
+        {/* Idea Details Card */}
+        <Card className="bg-linear-to-r from-pink-100 via-mauve-300 to-mauve-400  shadow-2xl overflow-hidden">
+          <img
+            src={idea.imageURL}
+            alt={idea.title}
+            className="w-full h-100 object-cover rounded-2xl"
+          />
+
+          <div className="p-8 space-y-6">
+            <div>
+              <p className="text-sm text-mauve-400 font-medium">
+                {idea.category}
+              </p>
+
+              <h1 className="text-4xl text-mauve-700 font-bold mt-2">
+                {idea.title}
+              </h1>
+            </div>
+
+            <p className="text-slate-400 leading-8 text-lg">
+              {idea.detailedDescription}
+            </p>
+
+            <div className="flex items-center justify-between border-t border-slate-800 pt-5">
+              <div className="flex items-center gap-3">
+                <Avatar src={"https://cdn-icons-png.flaticon.com/512/6596/6596121.png"} />
+
+                <div>
+                  <p className="font-semibold text-mauve-400">
+                    {idea.creatorName || "Anonymous"}
+                  </p>
+
+                  <p className="text-sm text-slate-400">
+                    Posted on {idea?.createdAt || "Not specified"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-6 text-slate-300">
+                <div className="flex items-center gap-2">
+                  <FaHeart size={18} />
+                  <span>{idea?.likes ?? 0}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <FaRegCommentDots size={18} />
+                  <span>{idea?.comments ?? 0}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        
+
+      </div>
+    </div>
+  );
+};
+
+export default IdeaDetailsPage;

@@ -173,10 +173,11 @@ const AddIdeaPage = () => {
 
             {/* Image URL */}
             <div className="md:col-span-2">
-              <TextField name="imageUrl" isRequired>
+              <TextField name="imageURL" isRequired>
                 <Label className="text-mauve-600">Image URL</Label>
                 <Input
                   type="url"
+                  
                   placeholder="Enter image URL"
                 />
                 <FieldError />

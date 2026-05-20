@@ -1,10 +1,13 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, TextArea } from "@heroui/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 const CommentForm = ({ ideaId }) => {
+  const { data: session } = authClient.useSession();
+      console.log(session,"session")
   const [comment, setComment] = useState("");
 
   const handleAddComment = async () => {
@@ -14,9 +17,13 @@ const CommentForm = ({ ideaId }) => {
     }
 
     const commentData = {
-      user: "Anonymous User",
+      ideaId,
+      userId: session?.user?.id,
+      userName: session?.user?.name,
+      userEmail: session?.user?.email,
+      userImage: session?.user?.image,
       text: comment,
-      time: new Date().toLocaleString(),
+      createdAt: new Date(),
     };
 
     try {

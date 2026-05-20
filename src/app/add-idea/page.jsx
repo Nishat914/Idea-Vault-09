@@ -11,6 +11,7 @@ import {
   Card,
   Input,
 } from "@heroui/react";
+import toast from "react-hot-toast";
 import { TypeAnimation } from "react-type-animation";
 
 
@@ -25,6 +26,7 @@ const AddIdeaPage = () => {
 
     console.log(ideas);
 
+    try {
     const res = await fetch("http://localhost:5000/ideas", {
       method: "POST",
       headers: {
@@ -34,7 +36,22 @@ const AddIdeaPage = () => {
     });
 
     const data = await res.json();
-    console.log(data);
+    console.log(data)
+
+    if (res.ok) {
+      toast.success("Idea added successfully!");
+
+      e.target.reset();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      toast.error(data.message || "Failed to add idea!");
+    }
+  } catch (error) {
+    toast.error("Something went wrong!");
+  }
     
   };
 
@@ -178,7 +195,7 @@ const AddIdeaPage = () => {
                 <Label className="text-mauve-600">Image URL</Label>
                 <Input
                   type="url"
-                  
+                  name="imageURL"
                   placeholder="Enter image URL"
                 />
                 <FieldError />

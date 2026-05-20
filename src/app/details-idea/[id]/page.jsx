@@ -36,7 +36,7 @@ const IdeaDetailsPage = async ({ params }) => {
               </h1>
             </div>
 
-            <p className="text-mauve-500 leading-8 text-lg">
+            <p className="text-mauve-500 leading-8 text-lg wrap-break-word ">
               {idea.detailedDescription}
             </p>
 

@@ -1,4 +1,4 @@
-"use client"
+
 import {Avatar, Button, Card} from "@heroui/react";
 import Link from "next/link";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
@@ -10,12 +10,19 @@ const TreandingPage = async () => {
     console.log(ideas)
     return(
         <>
+
             <div>
-                <h2 className=" text-5xl text-mauve-600 text-center font-bold mt-20 ">
+            <div>
+                <h2 className=" text-5xl text-mauve-600 text-center font-bold mt-20 container mx-auto w-[80%] bg-linear-to-r from-pink-100 via-mauve-300 to-mauve-300 p-6">
                     The Future Is Built From Ideas Like These
                 </h2>
+                
             </div>
-            <div className="container mx-auto w-[80%] grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-20">
+            <div>
+                <h2 className=" text-5xl text-mauve-600  font-bold mt-20 container mx-auto w-[80%] ">Top 6 Trending Idea :</h2>
+            </div>
+
+            <div className="container mx-auto w-[80%] grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-16">
                             {ideas.map((idea) => {
                                 return(
                                     <Card key={idea._id} className="h-full flex flex-col gap-2 bg-linear-to-t from-pink-100 via-mauve-200 to-mauve-300">
@@ -50,6 +57,7 @@ const TreandingPage = async () => {
                             })}
                              
             
+                        </div>
                         </div>
                          
         </>

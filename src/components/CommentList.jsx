@@ -4,38 +4,62 @@ import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { AlertDialog, Button, Modal, Surface, TextArea } from "@heroui/react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const CommentList = ({idea}) => {
     const [editText, setEditText] = useState("");
     const [selectedIndex, setSelectedIndex] = useState(null);
 
     const handleDeleteComment = async (index) => {
-        await fetch(
-        `http://localhost:5000/ideas/${idea._id}/comments/${index}/delete`,
-        {
-            method: "PATCH",
-        }
-        );
+         try {
+            const res = await fetch(
+                `http://localhost:5000/ideas/${idea._id}/comments/${index}/delete`,
+                {
+                    method: "PATCH",
+                }
+            );
 
-        window.location.reload();
+        if (res.ok) {
+                toast.success("Comment deleted successfully!");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+        } catch (error) {
+            toast.error("Failed to delete comment!");
+        }
     };
     const handleEditComment = async () => {
-        if (!editText.trim()) return;
+        if (!editText.trim()) {
+            toast.error("Comment cannot be empty!");
+            return;
+        }
 
-        await fetch(`http://localhost:5000/ideas/${idea._id}/comments/${selectedIndex}`,
-            {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify({
-                text: editText,
-            }),
+        try {
+            const res = await fetch(
+                `http://localhost:5000/ideas/${idea._id}/comments/${selectedIndex}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        text: editText,
+                    }),
+                }
+            );
+
+            if (res.ok) {
+                toast.success("Comment updated successfully!");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
-        );
-
-        window.location.reload();
+        } catch (error) {
+            toast.error("Failed to update comment!");
+        }
     };
+    
     return(
         <>
             <div className="space-y-5">

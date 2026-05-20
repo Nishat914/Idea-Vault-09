@@ -85,7 +85,7 @@ const AddIdeaPage = () => {
             <div className="md:col-span-2">
               <TextField name="title" isRequired>
                 <Label className="text-mauve-600">Title</Label>
-                <Input placeholder="Enter title" />
+                <Input placeholder="Enter title" className="input text-mauve-700 bg-mauve-300 "/>
                 <FieldError />
               </TextField>
             </div>
@@ -96,7 +96,7 @@ const AddIdeaPage = () => {
                 <Label className="text-mauve-600">Description</Label>
                 <TextArea
                   placeholder="Describe shortly..."
-                  className="min-h-28"
+                  className="min-h-28 text-mauve-700 bg-mauve-300"
                 />
                 <FieldError />
               </TextField>
@@ -105,7 +105,7 @@ const AddIdeaPage = () => {
             <div className="md:col-span-2">
               <TextField name="tags" isRequired>
                 <Label className="text-mauve-600">Tags</Label>
-                <Input placeholder="Enter tag" />
+                <Input placeholder="Enter tag" className="input text-mauve-700 bg-mauve-300 "/>
                 <FieldError />
               </TextField>
             </div>
@@ -116,7 +116,7 @@ const AddIdeaPage = () => {
                 <Label className="text-mauve-600">Detail Description</Label>
                 <TextArea
                   placeholder="Detailed description..."
-                  className="min-h-28"
+                  className="min-h-28 text-mauve-700 bg-mauve-300"
                 />
                 <FieldError />
               </TextField>
@@ -125,26 +125,26 @@ const AddIdeaPage = () => {
             {/* Target Audience */}
             <TextField name="targetAudience" isRequired>
               <Label className="text-mauve-600">Target Audience</Label>
-              <Input placeholder="Enter target audience" />
+              <Input placeholder="Enter target audience" className="input text-mauve-700 bg-mauve-300 " />
               <FieldError />
             </TextField>
 
             {/* Category */}
-            <div>
+            <div >
               <Select
                 name="category"
                 isRequired
-                className="w-full"
+                className="w-full  bg-mauve-300"
                 placeholder="Select category"
               >
                 <Label className="text-mauve-600">Category</Label>
-                <Select.Trigger>
+                <Select.Trigger className={"text-mauve-700 bg-mauve-300"}>
                   <Select.Value />
                   <Select.Indicator />
                 </Select.Trigger>
 
                 <Select.Popover>
-                  <ListBox>
+                  <ListBox className=" bg-mauve-300">
                     <ListBox.Item id="Tech" textValue="Tech" className="text-mauve-600">
                       Tech
                     </ListBox.Item>
@@ -171,7 +171,7 @@ const AddIdeaPage = () => {
                 <Label className="text-mauve-600">Problem Statement</Label>
                 <TextArea
                   placeholder="Problem statement..."
-                  className="min-h-28 "
+                  className="min-h-28 text-mauve-700 bg-mauve-300"
                 />
                 <FieldError />
               </TextField>
@@ -183,7 +183,7 @@ const AddIdeaPage = () => {
                 <Label className="text-mauve-600">Proposed Solution</Label>
                 <TextArea
                   placeholder="Proposed solution..."
-                  className="min-h-28"
+                  className="min-h-28 text-mauve-700 bg-mauve-300"
                 />
                 <FieldError />
               </TextField>
@@ -197,6 +197,7 @@ const AddIdeaPage = () => {
                   type="url"
                   name="imageURL"
                   placeholder="Enter image URL"
+                  className="input text-mauve-700 bg-mauve-300 "
                 />
                 <FieldError />
               </TextField>

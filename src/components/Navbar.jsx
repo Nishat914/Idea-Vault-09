@@ -29,7 +29,7 @@ const Navbar = () => {
                             <Link href="/" className={navLinkClass("/")}>Home</Link>
                             <Link href="/ideas" className={navLinkClass("/ideas")}>Ideas</Link>
                             <div className="dropdown  dropdown-bottom dropdown-center">
-                                <div tabIndex={0} role="button" className="btn m-1">
+                                <div tabIndex={0} role="button" className="btn bg-mauve-400 border border-mauve-400 m-1">
                                     <RiArrowDropDownFill />
                                 </div>
                                 <ul tabIndex="-1" className="dropdown-content menu menu-sm bg-mauve-200 rounded-box z-1 w-52 p-2 shadow-sm">
@@ -72,8 +72,8 @@ const Navbar = () => {
                                         ? "bg-mauve-500 text-white"
                                         : ""
                                 }`}>Profile</Link></li>
-                                <li><Link  href="/add-idea">Login</Link></li>
-                                <li><Link  href="/add-idea">SignUp</Link></li>
+                                <li><Link  href="/login">Login</Link></li>
+                                
                             </ul>
                             </div>
                             

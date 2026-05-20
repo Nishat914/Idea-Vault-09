@@ -3,7 +3,7 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+
 import { Toaster } from "react-hot-toast";
 import NextThemeProvider from "./providers/NextThemeProvider";
 

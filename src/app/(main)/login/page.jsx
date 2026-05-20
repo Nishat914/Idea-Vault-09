@@ -11,12 +11,15 @@ import {
   TextField,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 import Link from "next/link";
 
+
+
 const LoginPage = () => {
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,11 +31,13 @@ const LoginPage = () => {
       password: user.password,
     });
 
-    console.log({ data, error });
+    console.log( {data, error} );
 
     if (data) {
         toast.success("login successfully")
-      redirect("/");
+        router.refresh();
+        router.push("/");
+      
     }
 
     if (error) {

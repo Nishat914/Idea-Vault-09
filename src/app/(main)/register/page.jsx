@@ -12,11 +12,12 @@ import {
   TextField,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,7 +34,8 @@ const RegisterPage = () => {
 
     if (data) {
         toast.success('Successfully Register!')
-      redirect("/");
+        router.refresh();
+        router.push("/login");
     }
 
     if (error) {
@@ -58,7 +60,7 @@ const RegisterPage = () => {
             <FieldError />
           </TextField>
 
-          <TextField name="imageURL" type="url" >
+          <TextField name="image" type="url" >
             <Label>Image URL</Label>
             <Input placeholder="Image url" className=" w-full bg-mauve-300"/>
             <FieldError />

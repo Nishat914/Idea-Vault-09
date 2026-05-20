@@ -4,9 +4,17 @@ import Link from "next/link";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 import { ThemeSwitch } from "./ThemeSwitch";
+import { authClient } from "@/lib/auth-client";
+
 
 const Navbar = () => {
+    const { data: session , isPending} = authClient.useSession();
+    console.log(session,"session")
+    const user = session?.user;
+    console.log(user,"user")
+    console.log(isPending)
 
+    
     const pathname = usePathname();
 
     const navLinkClass = (path) =>
@@ -15,6 +23,10 @@ const Navbar = () => {
                 ? "border-b-2 border-mauve-500 text-mauve-500 "
                 : "text-mauve-800 dark:text-mauve-300"
         }`;
+
+    const handleSignOut = async () => {
+        await authClient.signOut();
+    };
     
     return(
         <>
@@ -28,7 +40,7 @@ const Navbar = () => {
                         <div className=" flex justify-center items-center  gap-6">
                             <Link href="/" className={navLinkClass("/")}>Home</Link>
                             <Link href="/ideas" className={navLinkClass("/ideas")}>Ideas</Link>
-                            <div className="dropdown  dropdown-bottom dropdown-center">
+                            {user? <div className="dropdown  dropdown-bottom dropdown-center">
                                 <div tabIndex={0} role="button" className="btn bg-mauve-400 border border-mauve-400 m-1">
                                     <RiArrowDropDownFill />
                                 </div>
@@ -50,7 +62,8 @@ const Navbar = () => {
                                         }`}>My Interactions</Link></li>
                                 </ul>
                             
-                            </div>
+                            </div> : <div></div>}
+                            
                         
                         </div>
                         
@@ -59,20 +72,47 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                <img
+                                    {user?
+                                    <img alt="user" src={user.image} />
+                                    :
+                                    <img
                                     alt="Tailwind CSS Navbar component"
                                     src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                    }
+                                
                                 </div>
                             </div>
                             <ul
                                 tabIndex="-1"
                                 className="menu menu-sm dropdown-content bg-mauve-200 rounded-box z-10 mt-3 w-52 p-2 shadow">
-                                <li><Link  href="/profile"  className={`${
+                                    {user?(
+                                        <>
+                                            <li><Link  href="/profile"  className={`${
                                     pathname === "/profile"
                                         ? "bg-mauve-500 text-white"
                                         : ""
-                                }`}>Profile</Link></li>
-                                <li><Link  href="/login">Login</Link></li>
+                                        }`}>Profile</Link>
+                                        </li>
+
+                                        <li>
+                                            <button
+                                            onClick={handleSignOut}
+                                            className="w-full text-left"
+                                            >
+                                            Logout
+                                            </button>
+                                        </li>
+                                        </>
+                                        
+                                        
+
+                                    ) : <li><Link  href="/login" className={`${
+                                    pathname === "/login"
+                                        ? "bg-mauve-500 text-white"
+                                        : ""
+                                        }`}>Login</Link></li>}
+                                
+                                
                                 
                             </ul>
                             </div>

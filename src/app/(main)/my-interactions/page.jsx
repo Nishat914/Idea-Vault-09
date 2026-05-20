@@ -3,6 +3,8 @@
 import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
 import {Button, Card, CloseButton} from "@heroui/react";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { FaBoxTissue } from "react-icons/fa";
 
 const MyIdeaInteractions = () => {
   const { data: session } = authClient.useSession();
@@ -20,8 +22,8 @@ const MyIdeaInteractions = () => {
     <div>
       <h2 className="text-3xl text-mauve-600 font-bold text-center mt-20">My Interactions</h2>
       
-
-      {comments.map((comment, index) => (
+    { comments.length > 0 ? 
+    (comments.map((comment, index) => (
         <div key={index} className="container mx-auto w-[80%]">
           <Card className="w-full items-stretch md:flex-row bg-linear-to-r from-pink-100 via-mauve-300 to-mauve-400 p-6 mt-6 rounded-2xl">
             <div className="relative h-35 w-full shrink-0 overflow-hidden rounded-2xl sm:h-30 sm:w-30">
@@ -46,7 +48,13 @@ const MyIdeaInteractions = () => {
             </div>
             </Card>
         </div>
-      ))}
+      ))) :  (
+              <div className="container mx-auto w-[80%] mt-16 text-center py-8 bg-linear-to-r from-pink-200 via-mauve-400 to-mauve-500 rounded-2xl flex justify-center items-center flex-col gap-4">
+                <FaBoxTissue  className="text-4xl text-white" />
+                <p className="text-slate-200 text-lg">No Interactions yet!!</p>
+              </div>
+            ) }
+      
     </div>
   );
 };

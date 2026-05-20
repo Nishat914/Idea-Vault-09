@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   FieldError,
   Label,
@@ -17,6 +18,7 @@ import { TypeAnimation } from "react-type-animation";
 
 
 const AddIdeaPage = () => {
+  const { data: session } = authClient.useSession();
     
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +27,12 @@ const AddIdeaPage = () => {
     const ideas = Object.fromEntries(formData.entries());
 
     console.log(ideas);
+    const ideaData = {
+      ...ideas,
+      userId: session.user.id,
+      userEmail: session.user.email,
+      userName: session.user.name,
+    };
 
     try {
         const res = await fetch("http://localhost:5000/ideas", {
@@ -32,7 +40,7 @@ const AddIdeaPage = () => {
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify(ideas),
+          body: JSON.stringify(ideaData),
         });
 
         const data = await res.json();
@@ -85,7 +93,7 @@ const AddIdeaPage = () => {
             <div className="md:col-span-2">
               <TextField name="title" isRequired>
                 <Label className="text-mauve-600">Title</Label>
-                <Input placeholder="Enter title" className="input text-mauve-700 bg-mauve-300 "/>
+                <Input placeholder="Enter title" className="input w-full text-mauve-700 bg-mauve-300 "/>
                 <FieldError />
               </TextField>
             </div>
@@ -105,7 +113,7 @@ const AddIdeaPage = () => {
             <div className="md:col-span-2">
               <TextField name="tags" isRequired>
                 <Label className="text-mauve-600">Tags</Label>
-                <Input placeholder="Enter tag" className="input text-mauve-700 bg-mauve-300 "/>
+                <Input placeholder="Enter tag" className="input w-full text-mauve-700 bg-mauve-300 "/>
                 <FieldError />
               </TextField>
             </div>
@@ -197,7 +205,7 @@ const AddIdeaPage = () => {
                   type="url"
                   name="imageURL"
                   placeholder="Enter image URL"
-                  className="input text-mauve-700 bg-mauve-300 "
+                  className="input w-full text-mauve-700 bg-mauve-300 "
                 />
                 <FieldError />
               </TextField>

@@ -21,7 +21,7 @@ const Navbar = () => {
             <div className="relative z-50">
                 <div className="navbar flex-col md:flex-row  bg-transparent  shadow-sm p-4 relative z-50">
                     <div className="flex-1">
-                        <p className="btn btn-ghost text-4xl font-bold text-mauve-700">Idea<span className="text-mauve-500 ">Vault</span></p>
+                        <p className="btn btn-ghost text-4xl font-bold text-mauve-700 dark:text-mauve-400">Idea<span className="text-mauve-500 ">Vault</span></p>
                         
                     </div>
                     <div className="flex justify-center items-center gap-4 text-mauve-800">

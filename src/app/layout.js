@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
       <body className=" text-foreground min-h-full flex flex-col bg-linear-to-r from-pink-100 via-mauve-200 to-mauve-300
       dark:bg-linear-to-r dark:from-mauve-800 dark:via-mauve-700 dark:to-mauve-900">
         <NextThemeProvider>
-            <Navbar></Navbar>
+           
           {children}
         <Toaster position="top-right" />
         </NextThemeProvider>

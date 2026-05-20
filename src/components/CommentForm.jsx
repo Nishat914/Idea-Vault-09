@@ -2,12 +2,16 @@
 
 import { Button, TextArea } from "@heroui/react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const CommentForm = ({ ideaId }) => {
   const [comment, setComment] = useState("");
 
   const handleAddComment = async () => {
-    if (!comment.trim()) return;
+    if (!comment.trim()) {
+      toast.error("Comment cannot be empty!");
+      return;
+    }
 
     const commentData = {
       user: "Anonymous User",
@@ -15,16 +19,30 @@ const CommentForm = ({ ideaId }) => {
       time: new Date().toLocaleString(),
     };
 
-    await fetch(`http://localhost:5000/ideas/${ideaId}/comments`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(commentData),
-    });
+    try {
+        const res = await fetch(`http://localhost:5000/ideas/${ideaId}/comments`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(commentData),
+        });
 
-    setComment("");
-    window.location.reload();
+        if (!res.ok) {
+          toast.error("Failed to add comment");
+          return;
+        }
+
+        toast.success("Comment added successfully!");
+        setComment("");
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+      } catch (error) {
+        toast.error("Something went wrong!");
+      }
   };
 
   return (

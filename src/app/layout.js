@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
+import NextThemeProvider from "./providers/NextThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,13 +23,17 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme="light"
+     suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-linear-to-r from-pink-100 via-mauve-200 to-mauve-300 ">
-        <Navbar></Navbar>
-        {children}
+      <body className=" text-foreground min-h-full flex flex-col bg-linear-to-r from-pink-100 via-mauve-200 to-mauve-300
+      dark:bg-linear-to-r dark:from-mauve-800 dark:via-mauve-700 dark:to-mauve-900">
+        <NextThemeProvider>
+            <Navbar></Navbar>
+          {children}
         <Toaster position="top-right" />
+        </NextThemeProvider>
+        
       </body>
     </html>
   );

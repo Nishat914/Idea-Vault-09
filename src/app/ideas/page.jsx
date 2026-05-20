@@ -24,7 +24,7 @@ const IdeasPage = async() => {
                     src={idea.imageURL}
                     />
                     <Card.Header>
-                    <Card.Title >{idea.title}</Card.Title>
+                    <Card.Title className="text-mauve-600">{idea.title}</Card.Title>
                     <Card.Description>category : {idea.category}</Card.Description>
                     </Card.Header>
                     <Card.Footer className="flex gap-2">
@@ -35,7 +35,7 @@ const IdeasPage = async() => {
                         />
                         <Avatar.Fallback className="text-xs">IH</Avatar.Fallback>
                     </Avatar>
-                    <span className="text-xs "> {idea.targetAudience}</span>
+                    <span className="text-xs text-mauve-600 "> {idea.targetAudience}</span>
                     
                     </Card.Footer>
                     <Link href={`/details-idea/${idea._id}`}>

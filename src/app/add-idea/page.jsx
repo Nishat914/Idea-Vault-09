@@ -27,31 +27,31 @@ const AddIdeaPage = () => {
     console.log(ideas);
 
     try {
-    const res = await fetch("http://localhost:5000/ideas", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(ideas),
-    });
+        const res = await fetch("http://localhost:5000/ideas", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(ideas),
+        });
 
-    const data = await res.json();
-    console.log(data)
+        const data = await res.json();
+        console.log(data)
 
-    if (res.ok) {
-      toast.success("Idea added successfully!");
+        if (res.ok) {
+          toast.success("Idea added successfully!");
 
-      e.target.reset();
+          e.target.reset();
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      toast.error(data.message || "Failed to add idea!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          toast.error(data.message || "Failed to add idea!");
+        }
+      } catch (error) {
+        toast.error("Something went wrong!");
     }
-  } catch (error) {
-    toast.error("Something went wrong!");
-  }
     
   };
 
@@ -171,7 +171,7 @@ const AddIdeaPage = () => {
                 <Label className="text-mauve-600">Problem Statement</Label>
                 <TextArea
                   placeholder="Problem statement..."
-                  className="min-h-28"
+                  className="min-h-28 "
                 />
                 <FieldError />
               </TextField>

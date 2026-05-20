@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { usePathname } from "next/navigation";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 const Navbar = () => {
 
@@ -11,8 +12,8 @@ const Navbar = () => {
     const navLinkClass = (path) =>
         `font-semibold pb-1 ${
             pathname === path
-                ? "border-b-2 border-mauve-500 text-mauve-500"
-                : "text-mauve-800"
+                ? "border-b-2 border-mauve-500 text-mauve-500 "
+                : "text-mauve-800 dark:text-mauve-300"
         }`;
     
     return(
@@ -75,6 +76,10 @@ const Navbar = () => {
                                 <li><Link  href="/add-idea">SignUp</Link></li>
                             </ul>
                             </div>
+                            
+                        </div>
+                        <div>
+                                <ThemeSwitch></ThemeSwitch>
                         </div>
                     </div>
                 

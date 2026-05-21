@@ -58,6 +58,7 @@ const CommentForm = ({ ideaId }) => {
         placeholder="Write your comment..."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
+        className={"bg-mauve-300"}
       />
 
       <Button

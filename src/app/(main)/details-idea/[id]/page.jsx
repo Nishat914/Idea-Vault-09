@@ -13,15 +13,15 @@ export const metadata = {
 const IdeaDetailsPage = async ({ params }) => {
     const { id } = await params;
     console.log(id)
+    
     const tokenData = await auth.api.getToken({
       headers : await headers()
     })
-    console.log(tokenData)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}` , {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}`, {
       headers : {
       authorization : `Bearer ${tokenData?.token}`
     }
-    });
+    } );
     const idea = await res.json();
     // console.log(idea)
 

@@ -13,7 +13,7 @@ const CommentList = ({ idea }) => {
   const [comments, setComments] = useState(idea?.comments || []);
   const [editText, setEditText] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
-
+  
   const handleDeleteComment = async (index) => {
     try {
       const res = await fetch(
@@ -43,7 +43,7 @@ const CommentList = ({ idea }) => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/${idea._id}/comments/${selectedIndex}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${idea._id}/comments/${selectedIndex}`,
         {
           method: "PATCH",
           headers: {
@@ -70,6 +70,7 @@ const CommentList = ({ idea }) => {
       toast.error("Failed to update comment!");
     }
   };
+  console.log(comments,"comments")
 
   return (
     <div className="space-y-5">
@@ -77,7 +78,7 @@ const CommentList = ({ idea }) => {
         comments.map((comment, index) => (
           <div
             key={index}
-            className="border border-mauve-600 rounded-2xl p-5 bg-mauve-500 flex justify-between items-center"
+            className="border border-mauve-600 rounded-2xl p-5 bg-mauve-500 flex flex-col md:flex-row gap-3 justify-between items-center"
           >
             <div className="flex gap-4 items-start">
               <img
@@ -92,7 +93,8 @@ const CommentList = ({ idea }) => {
                     {comment.userName || "Anonymous User"}
                   </h4>
 
-                  <p className="text-sm text-slate-300">{comment.time}</p>
+                  <p className="text-sm text-mauve-300">{comment.createdAt
+}</p>
                 </div>
 
                 <p className="mt-4 text-white">{comment.text}</p>

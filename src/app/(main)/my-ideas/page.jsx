@@ -29,9 +29,13 @@ const MyIdeasPage = () => {
 
   const handleDelete = async (id) => {
   try {
-    
+    const {data : tokenData}= await authClient.token()
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}`, {
       method: "DELETE",
+      headers: {
+            
+            authorization : `Bearer ${tokenData?.token}`
+          },
     });
 
     const data = await res.json();
@@ -41,8 +45,8 @@ const MyIdeasPage = () => {
     }
     toast.success("deleted successfully!")
   } catch (error) {
-    toast.error(error);
-  }
+  toast.error(error?.message || "Update failed");
+}
 };
     const handleUpdate = async (e) => {
   e.preventDefault();
@@ -51,13 +55,15 @@ const MyIdeasPage = () => {
   const updatedIdea = Object.fromEntries(formData.entries());
 
   try {
+    const {data : tokenData}= await authClient.token()
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/${selectedIdea._id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${selectedIdea._id}`,
       {
         method: "PATCH",
         headers: {
-          "content-type": "application/json",
-        },
+        "content-type": "application/json",
+        authorization : `Bearer ${tokenData?.token}`
+      },
         body: JSON.stringify(updatedIdea),
       }
     );
@@ -74,8 +80,8 @@ const MyIdeasPage = () => {
       toast.success("updated successfully!")
     }
   } catch (error) {
-    toast.error(error);
-  }
+  toast.error(error?.message || "Update failed");
+}
 };
 
   return (

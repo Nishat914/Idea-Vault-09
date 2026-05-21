@@ -62,8 +62,7 @@ const IdeasPage = async ({ searchParams }) => {
             className=" rounded-xl px-4 py-3 bg-mauve-300 min-w-50 text-mauve-600 "
             >
             <option value="">All Categories</option>
-            <option value="Technology">Technology</option>
-            <option value="Business">Business</option>
+            <option value="Technology">Tech</option>
             <option value="Education">Education</option>
             <option value="Health">Health</option>
             <option value="AI">AI</option>

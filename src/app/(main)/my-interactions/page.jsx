@@ -16,13 +16,31 @@ const MyIdeaInteractions = () => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    if (!session?.user?.id) return;
+  if (!session?.user?.id) return;
 
-    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-interactions/${session.user.id}`)
-      .then((res) => res.json())
-      .then((data) => setComments(data));
-  }, [session]);
+  const fetchComments = async () => {
+    try {
+      const {data : tokenData}= await authClient.token()
 
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/my-interactions/${session.user.id}`,
+        {
+          headers: {
+            
+            authorization : `Bearer ${tokenData?.token}`
+          },
+        }
+      );
+
+      const data = await res.json();
+      setComments(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchComments();
+}, [session]);
   return (
     <div>
       <h2 className="text-3xl text-mauve-600 font-bold text-center mt-20 dark:text-mauve-300">My Interactions</h2>
@@ -47,6 +65,7 @@ const MyIdeaInteractions = () => {
                     {comment.commentText}
                     
                 </Card.Description>
+               
                 
                 </Card.Header>
                 

@@ -13,9 +13,9 @@ const MyProfilePage = () => {
 
   if (isPending) {
     return (
-      <p className="text-mauve-600 dark:text-mauve-300 text-center mt-20">
-        Loading...
-      </p>
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="loading loading-infinity loading-xl text-mauve-600"></span>
+    </div>
     );
   }
 

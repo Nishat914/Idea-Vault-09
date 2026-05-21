@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import { FaFacebook, FaInstagram, FaTwitter, FaXTwitter } from 'react-icons/fa6';
 const Footer = () => {
   return (
     <footer className="bg-linear-to-r from-mauve-800 via-mauve-600 to-mauve-400 text-gray-400  p-16 mt-15">
@@ -25,7 +25,7 @@ const Footer = () => {
                     </a>
 
                     <a className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-white hover:text-black transition cursor-pointer">
-                    <FaTwitter/>
+                    <FaXTwitter />
                     </a>
 
                 </div>

@@ -1,4 +1,5 @@
 "use client";
+
 import { FcGoogle } from "react-icons/fc";
 import { Card, Separator } from "@heroui/react";
 
@@ -15,8 +16,15 @@ import { authClient } from "@/lib/auth-client";
 import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
+
+
 
 const RegisterPage = () => {
+
+  useEffect(() => {
+      document.title = "Idea Vault | Register";
+    }, []);
   const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +51,13 @@ const RegisterPage = () => {
       toast.error("Error");
     }
   };
+
+  const handleGoogleSignIn = async() => {
+        const data = await authClient.signIn.social({
+        provider: "google",
+    });
+    console.log(data)
+    }
 
   
 
@@ -126,6 +141,7 @@ const RegisterPage = () => {
         <div>
           <Button
             
+            onClick={handleGoogleSignIn}
             
             className={"w-full  bg-mauve-400 rounded-sm"}
           >

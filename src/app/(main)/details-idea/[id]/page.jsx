@@ -1,14 +1,27 @@
 import CommentForm from "@/components/CommentForm";
 import CommentList from "@/components/CommentList";
+import { auth } from "@/lib/auth";
 import { Card, Avatar, Button, TextArea } from "@heroui/react";
+import { headers } from "next/headers";
 import { FaHeart, FaRegCommentDots, FaEdit, FaTrash } from "react-icons/fa";
 
-
+export const metadata = {
+  title: "Idea Vault - details-idea",
+  
+};
 
 const IdeaDetailsPage = async ({ params }) => {
     const { id } = await params;
     console.log(id)
-    const res = await fetch(`http://localhost:5000/ideas/${id}`);
+    const tokenData = await auth.api.getToken({
+      headers : await headers()
+    })
+    console.log(tokenData)
+    const res = await fetch(`http://localhost:5000/ideas/${id}` , {
+      headers : {
+      authorization : `Bearer ${tokenData?.token}`
+    }
+    });
     const idea = await res.json();
     console.log(idea)
 

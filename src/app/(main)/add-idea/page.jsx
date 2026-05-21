@@ -12,13 +12,21 @@ import {
   Card,
   Input,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { TypeAnimation } from "react-type-animation";
 
 
 
+
 const AddIdeaPage = () => {
+  useEffect(() => {
+    document.title = "Idea Vault | Add Idea";
+  }, []);
+
   const { data: session } = authClient.useSession();
+  const router = useRouter()
     
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -35,10 +43,13 @@ const AddIdeaPage = () => {
     };
 
     try {
+      const {data : tokenData}= await authClient.token()
+      console.log(tokenData)
         const res = await fetch("http://localhost:5000/ideas", {
           method: "POST",
           headers: {
             "content-type": "application/json",
+            authorization : `Bearer ${tokenData?.token}`
           },
           body: JSON.stringify(ideaData),
         });
@@ -52,7 +63,7 @@ const AddIdeaPage = () => {
           e.target.reset();
 
           setTimeout(() => {
-            window.location.reload();
+            router.push("/my-ideas");
           }, 1000);
         } else {
           toast.error(data.message || "Failed to add idea!");

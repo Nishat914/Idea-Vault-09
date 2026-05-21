@@ -1,5 +1,6 @@
 "use client";
 
+
 import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button, FieldError, Input, Label, Modal, Surface, TextArea, TextField, TextFieldContext  , Select, ListBox} from "@heroui/react";
 import { useEffect, useState } from "react";
@@ -7,10 +8,16 @@ import toast from "react-hot-toast";
 import { BiEdit } from "react-icons/bi";
 import { FaBoxTissue, FaEdit, FaTrash } from "react-icons/fa";
 
+
 const MyIdeasPage = () => {
+  useEffect(() => {
+    document.title = "Idea Vault | My-ideas";
+  }, []);
+
   const { data: session } = authClient.useSession();
   const [ideas, setIdeas] = useState([]);
   const [selectedIdea, setSelectedIdea] = useState(null);
+  
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -22,6 +29,7 @@ const MyIdeasPage = () => {
 
   const handleDelete = async (id) => {
   try {
+    
     const res = await fetch(`http://localhost:5000/ideas/${id}`, {
       method: "DELETE",
     });
@@ -31,7 +39,7 @@ const MyIdeasPage = () => {
     if (res.ok) {
       setIdeas(ideas.filter((idea) => idea._id !== id));
     }
-    toast.success("deleted idea!")
+    toast.success("deleted successfully!")
   } catch (error) {
     toast.error(error);
   }
@@ -73,7 +81,7 @@ const MyIdeasPage = () => {
   return (
     <>
         <div className="text-center mt-10">
-            <h2 className="text-3xl font-bold text-mauve-700">My Ideas</h2>
+            <h2 className="text-3xl font-bold text-mauve-700 dark:text-mauve-300">My Ideas</h2>
             <p className="font-semibold text-mauve-500 mt-4">A space where all my shared ideas, creativity, and inspirations come together</p>
         </div>
         <div className="container mx-auto w-[80%] mt-20">
@@ -94,7 +102,7 @@ const MyIdeasPage = () => {
                 <p>Category : <button className="px-4 rounded-2xl shadow-sm bg-mauve-300 text-mauve-600">{idea.category}</button></p>
                 <p>Tags : <button className="px-4 rounded-2xl shadow-sm bg-mauve-300 text-mauve-600">{idea.tags}</button></p>
                 <div className="card-actions justify-end">
-                <div className="flex gap-2">
+                <div className="flex gap-2 ">
                                 {/* Edit */}
                                 <Modal>
 
@@ -110,7 +118,7 @@ const MyIdeasPage = () => {
                                     <Modal.Dialog className="sm:max-w-xl">
                                         <Modal.CloseTrigger />
                                         <Modal.Header>
-                                        <Modal.Heading>Edit Destination</Modal.Heading>
+                                        <Modal.Heading>Edit My Ideas</Modal.Heading>
                                         </Modal.Header>
                                         <Modal.Body className="p-6">
                                         <Surface variant="default">
@@ -121,13 +129,14 @@ const MyIdeasPage = () => {
                                                 isRequired
                                             >
                                                 <Label>Title</Label>
-                                                <Input />
+                                                <Input className={"w-full bg-mauve-200 text-mauve-700"}/>
                                             </TextField>
 
                                             <TextField
                                                 name="description"
                                                 defaultValue={selectedIdea?.description}
                                                 isRequired
+                                                
                                             >
                                                 <Label>Description</Label>
                                                 <TextArea />
@@ -139,7 +148,7 @@ const MyIdeasPage = () => {
                                                 isRequired
                                             >
                                                 <Label>Tags</Label>
-                                                <Input />
+                                                <Input className={"w-full bg-mauve-200 text-mauve-700"}/>
                                             </TextField>
 
                                             <TextField
@@ -157,7 +166,7 @@ const MyIdeasPage = () => {
                                                 isRequired
                                             >
                                                 <Label>Target Audience</Label>
-                                                <Input />
+                                                <Input className={"w-full bg-mauve-200 text-mauve-700"}/>
                                             </TextField>
 
                                             <TextField
@@ -184,10 +193,10 @@ const MyIdeasPage = () => {
                                                 isRequired
                                             >
                                                 <Label>Image URL</Label>
-                                                <Input />
+                                                <Input className={"w-full bg-mauve-200 text-mauve-700"}/>
                                             </TextField>
 
-                                            <Button type="submit" slot="close">
+                                            <Button type="submit" slot="close" className={"w-full bg-mauve-400"}>
                                                 Update Idea
                                             </Button>
                                             </form>

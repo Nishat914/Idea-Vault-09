@@ -2,9 +2,16 @@ import {Avatar, Button, Card} from "@heroui/react";
 import Link from "next/link";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { motion } from "framer-motion";
-const IdeasPage = async() => {
 
-    const res = await fetch(`http://localhost:5000/ideas`)
+
+export const metadata = {
+  title: "Idea Vault - all-idea",
+  
+};
+const IdeasPage = async() => {
+    
+
+    const res = await fetch(`http://localhost:5000/ideas` )
     const ideas = await res.json() 
     console.log(ideas)
 

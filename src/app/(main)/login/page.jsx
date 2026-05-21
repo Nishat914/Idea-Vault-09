@@ -15,10 +15,14 @@ import { useSearchParams , useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useEffect } from "react";
 
 
 
 const LoginPage = () => {
+  useEffect(() => {
+    document.title = "Idea Vault | Login";
+  }, []);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -48,7 +52,12 @@ const LoginPage = () => {
       toast.error("Error");
     }
   };
-
+  const handleGoogleSignIn = async() => {
+      const data = await authClient.signIn.social({
+      provider: "google",
+  });
+  console.log(data)
+  }
   
 
   return (
@@ -122,7 +131,7 @@ const LoginPage = () => {
         <div>
           <Button
             
-            
+            onClick={handleGoogleSignIn}
             className={"w-full  bg-mauve-400 rounded-sm"}
           >
             <FcGoogle /> Google

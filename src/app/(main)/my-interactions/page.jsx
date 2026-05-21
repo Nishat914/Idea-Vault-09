@@ -6,7 +6,12 @@ import {Button, Card, CloseButton} from "@heroui/react";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { FaBoxTissue } from "react-icons/fa";
 
+
+
 const MyIdeaInteractions = () => {
+  useEffect(() => {
+    document.title = "Idea Vault | My-interactions";
+  }, []);
   const { data: session } = authClient.useSession();
   const [comments, setComments] = useState([]);
 
@@ -20,7 +25,7 @@ const MyIdeaInteractions = () => {
 
   return (
     <div>
-      <h2 className="text-3xl text-mauve-600 font-bold text-center mt-20">My Interactions</h2>
+      <h2 className="text-3xl text-mauve-600 font-bold text-center mt-20 dark:text-mauve-300">My Interactions</h2>
       
     { comments.length > 0 ? 
     (comments.map((comment, index) => (

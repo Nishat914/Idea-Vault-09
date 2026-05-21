@@ -17,13 +17,13 @@ const IdeaDetailsPage = async ({ params }) => {
       headers : await headers()
     })
     console.log(tokenData)
-    const res = await fetch(`http://localhost:5000/ideas/${id}` , {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}` , {
       headers : {
       authorization : `Bearer ${tokenData?.token}`
     }
     });
     const idea = await res.json();
-    console.log(idea)
+    // console.log(idea)
 
 
   return (

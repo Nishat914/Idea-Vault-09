@@ -27,7 +27,7 @@ const CommentForm = ({ ideaId }) => {
     };
 
     try {
-        const res = await fetch(`http://localhost:5000/ideas/${ideaId}/comments`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${ideaId}/comments`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",

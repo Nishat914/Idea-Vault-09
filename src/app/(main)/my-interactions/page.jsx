@@ -18,7 +18,7 @@ const MyIdeaInteractions = () => {
   useEffect(() => {
     if (!session?.user?.id) return;
 
-    fetch(`http://localhost:5000/my-interactions/${session.user.id}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-interactions/${session.user.id}`)
       .then((res) => res.json())
       .then((data) => setComments(data));
   }, [session]);

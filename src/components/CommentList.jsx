@@ -17,7 +17,7 @@ const CommentList = ({ idea }) => {
   const handleDeleteComment = async (index) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/ideas/${idea._id}/comments/${index}/delete`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${idea._id}/comments/${index}/delete`,
         {
           method: "PATCH",
         }
@@ -43,7 +43,7 @@ const CommentList = ({ idea }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/ideas/${idea._id}/comments/${selectedIndex}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/${idea._id}/comments/${selectedIndex}`,
         {
           method: "PATCH",
           headers: {

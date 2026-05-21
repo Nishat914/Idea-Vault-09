@@ -5,7 +5,7 @@ import { LuSquareArrowOutUpRight } from "react-icons/lu";
 
 
 const TreandingPage = async () => {
-    const res = await fetch(`http://localhost:5000/ideas/trending`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/trending`)
     const ideas = await res.json() 
     console.log(ideas)
     return(

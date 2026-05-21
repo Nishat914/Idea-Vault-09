@@ -21,7 +21,7 @@ const MyIdeasPage = () => {
 
   useEffect(() => {
     if (session?.user?.email) {
-      fetch(`http://localhost:5000/my-ideas/${session.user.email}`)
+      fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-ideas/${session.user.email}`)
         .then((res) => res.json())
         .then((data) => setIdeas(data));
     }
@@ -30,7 +30,7 @@ const MyIdeasPage = () => {
   const handleDelete = async (id) => {
   try {
     
-    const res = await fetch(`http://localhost:5000/ideas/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${id}`, {
       method: "DELETE",
     });
 
@@ -52,7 +52,7 @@ const MyIdeasPage = () => {
 
   try {
     const res = await fetch(
-      `http://localhost:5000/ideas/${selectedIdea._id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/${selectedIdea._id}`,
       {
         method: "PATCH",
         headers: {

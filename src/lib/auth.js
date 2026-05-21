@@ -10,9 +10,9 @@ import { jwt } from "better-auth/plugins";
 
 const client = new MongoClient(process.env.MONGO_URI);
 
+await client.connect();
 
 const db = client.db('idea-vault');
-await client.connect();
 
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,

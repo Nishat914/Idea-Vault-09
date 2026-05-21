@@ -26,7 +26,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-20 px-6 max-w-7xl mx-auto">
+    <section className="py-20 px-6 max-w-7xl mx-auto container w-[80%]">
       <div className="text-center mb-14">
         <h2 className="text-4xl font-bold mb-4 text-mauve-600 dark:text-mauve-300">How Idea Vault Works</h2>
         <p className="text-mauve-400 max-w-2xl mx-auto">

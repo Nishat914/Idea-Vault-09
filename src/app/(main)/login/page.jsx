@@ -137,6 +137,12 @@ const LoginPage = () => {
             <FcGoogle /> Google
           </Button>
         </div>
+        <div className="mt-4">
+            <span className="text-gray-500">Forget passwaord? </span>
+                <Link href={"/forget"} className="text-mauve-600 text-[16px] font-semibold">
+                         change
+                </Link>
+        </div>
       </Card>
       </div>
     </div>

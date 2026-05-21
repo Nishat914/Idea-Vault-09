@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#  Idea Vault
 
-## Getting Started
+A modern full-stack web application where users can capture, organize, and manage their ideas effortlessly in one secure place.
 
-First, run the development server:
+🔗 **Live Site:** https://idea-vault-orcin.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##  Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-  **Secure Authentication** – Sign up and log in using email/password or Google authentication.
+-  **Create & Store Ideas** – Save your creative thoughts with title, description, category, and tags.
+-  **Update & Delete Ideas** – Easily edit or remove your ideas anytime.
+-  **Search & Filter Ideas** – Find ideas quickly by category or keyword.
+-  **Interactive Community Features** – Like, comment, and engage with ideas shared by others.
+-  **User Profile Management** – Update profile information and manage your personal account.
+-  **Responsive Modern UI** – Fully responsive design with clean user-friendly interface.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+##  Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Frontend
+- Next.js
+- React
+- Tailwind CSS
+- HeroUI
 
-## Learn More
+### Backend
+- Node.js
+- Express.js
+- MongoDB
 
-To learn more about Next.js, take a look at the following resources:
+### Authentication
+- Better Auth
+- Google OAuth
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
